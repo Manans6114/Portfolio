@@ -14,6 +14,7 @@ export default function setSplitText() {
   document.fonts.ready.then(() => {
     ScrollTrigger.config({ ignoreMobileResize: true });
     if (window.innerWidth < 900) return;
+
     const paras: NodeListOf<ParaElement> = document.querySelectorAll(".para");
     const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
 
@@ -22,6 +23,7 @@ export default function setSplitText() {
 
     paras.forEach((para: ParaElement) => {
       para.classList.add("visible");
+
       if (para.anim) {
         para.anim.progress(1).kill();
         para.split?.revert();
@@ -33,7 +35,7 @@ export default function setSplitText() {
       });
 
       para.anim = gsap.fromTo(
-        para.split.words,
+        para.split!.words,
         { autoAlpha: 0, y: 80 },
         {
           autoAlpha: 1,
@@ -49,17 +51,20 @@ export default function setSplitText() {
         }
       );
     });
+
     titles.forEach((title: ParaElement) => {
       if (title.anim) {
         title.anim.progress(1).kill();
         title.split?.revert();
       }
+
       title.split = new SplitText(title, {
         type: "chars,lines",
         linesClass: "split-line",
       });
+
       title.anim = gsap.fromTo(
-        title.split.chars,
+        title.split!.chars,
         { autoAlpha: 0, y: 80, rotate: 10 },
         {
           autoAlpha: 1,
