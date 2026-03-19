@@ -371,6 +371,20 @@
   }
 
   .carousel-arrow {
-    display: none;
+    display: flex;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    top: 12px;
+    transform: none;
+    background: rgba(10, 14, 23, 0.8);
+  }
+
+  .carousel-arrow-left {
+    left: 8px;
+  }
+
+  .carousel-arrow-right {
+    right: 8px;
   }
 }
