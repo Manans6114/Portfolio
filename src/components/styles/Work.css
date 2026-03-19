@@ -337,3 +337,40 @@
     max-height: 250px;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .work-section {
+    padding: 40px 0;
+  }
+
+  .work-section h2 {
+    font-size: clamp(30px, 11vw, 38px);
+    margin-bottom: 24px;
+  }
+
+  .carousel-slide {
+    padding: 24px 0;
+  }
+
+  .carousel-info {
+    gap: 14px;
+  }
+
+  .carousel-number h3 {
+    font-size: 26px;
+  }
+
+  .carousel-details h4 {
+    font-size: 18px;
+  }
+
+  .carousel-category,
+  .carousel-tools p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .carousel-arrow {
+    display: none;
+  }
+}

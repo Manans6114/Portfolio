@@ -34,7 +34,8 @@ h6 {
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 a {
@@ -88,6 +89,7 @@ body {
 .container1 {
   width: var(--cWidth);
   height: var(--vh);
+  min-height: 100svh;
   margin: auto;
   position: relative;
 }
@@ -127,6 +129,18 @@ body {
 @media screen and (min-width: 768px) {
   body {
     --cWidth: 94%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    --cWidth: calc(100% - 24px);
+    touch-action: pan-y;
+  }
+
+  .techstack {
+    margin-top: 20px;
+    margin-bottom: 0;
   }
 }
 
