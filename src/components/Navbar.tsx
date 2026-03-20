@@ -2,56 +2,56 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-export let smoother: ScrollSmoother;
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   useEffect(() => {
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
+    const links = document.querySelectorAll<HTMLAnchorElement>(".header ul a");
+
+    const handleClick = (e: Event) => {
+      if (window.innerWidth > 1024) {
+        e.preventDefault();
+
+        const element = e.currentTarget as HTMLAnchorElement;
+        const target = element.getAttribute("data-href");
+
+        if (!target) return;
+
+        document.querySelector(target)?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    };
+
+    links.forEach((element) => {
+      element.addEventListener("click", handleClick);
     });
 
-    smoother.scrollTop(0);
-    smoother.paused(true);
-
-    let links = document.querySelectorAll(".header ul a");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
-        }
+    // ✅ CLEANUP (important)
+    return () => {
+      links.forEach((element) => {
+        element.removeEventListener("click", handleClick);
       });
-    });
-    window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
-    });
+    };
   }, []);
+
   return (
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
           MS
         </a>
+
         <a
-          href="mailto:rajeshchittyal21@gmail.com"
+          href="mailto:manansharma127021@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
           manansharma127021@gmail.com
         </a>
+
         <ul>
           <li>
             <a data-href="#about" href="#about">

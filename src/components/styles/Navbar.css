@@ -3,6 +3,8 @@
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   padding: 20px 0px;
   margin-bottom: -100px;
   box-sizing: border-box;
@@ -15,13 +17,15 @@
 .header ul {
   font-size: 12px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style: none;
-  column-gap: 40px;
+  column-gap: 18px;
   row-gap: 8px;
-  align-items: end;
+  align-items: center;
+  justify-content: flex-end;
 }
 .header ul li {
   margin-left: 0px;
@@ -44,6 +48,17 @@
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+@media only screen and (max-width: 499px) {
+  .header {
+    padding: 14px 0px;
+  }
+
+  .header ul {
+    font-size: 11px;
+    column-gap: 12px;
+  }
 }
 @media only screen and (min-width: 500px) {
   .header {

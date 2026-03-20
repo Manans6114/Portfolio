@@ -130,6 +130,13 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -170,6 +177,11 @@ const TechStack = () => {
     );
   }, []);
 
+  const visibleSpheres = useMemo(
+    () => (isMobile ? spheres.slice(0, 16) : spheres),
+    [isMobile]
+  );
+
   return (
     <div className="techstack">
       <h2> My Techstack</h2>
@@ -177,7 +189,12 @@ const TechStack = () => {
       <Canvas
         shadows
         gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
+        camera={{
+          position: [0, 0, isMobile ? 24 : 20],
+          fov: isMobile ? 38 : 32.5,
+          near: 1,
+          far: 100,
+        }}
         onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
         className="tech-canvas"
       >
@@ -193,7 +210,7 @@ const TechStack = () => {
         <directionalLight position={[0, 5, -4]} intensity={2} />
         <Physics gravity={[0, 0, 0]}>
           <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
+          {visibleSpheres.map((props, i) => (
             <SphereGeo
               key={i}
               {...props}

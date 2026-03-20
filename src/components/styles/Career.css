@@ -206,6 +206,11 @@
   .career-container {
     width: calc(100% - 25px);
   }
+
+  .career-section {
+    padding-top: 120px;
+    margin-top: -90px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
