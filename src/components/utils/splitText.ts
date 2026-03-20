@@ -1,6 +1,8 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+// @ts-ignore
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+// @ts-ignore
 import { SplitText } from "gsap-trial/SplitText";
 
 interface ParaElement extends HTMLElement {
@@ -18,7 +20,7 @@ export default function setSplitText() {
     const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
 
     const TriggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
-    const ToggleAction = "play pause resume reverse";
+    const ToggleAction = "play none none reverse";
 
     paras.forEach((para: ParaElement) => {
       para.classList.add("visible");
